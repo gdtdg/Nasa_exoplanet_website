@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="./stylesheets/style.css"/>
+    <link rel="icon" href="./images/planet_favico.png"/>
+    <title>Nasa exoplanet archive</title>
+</head>
+
+<body>
+<div class="page_container">
+    <div class="content_wrap">
+        <header>
+            <nav class="navbar navbar-expand-md navbar-dark mb-3">
+                <a class="navbar-brand" href="http://localhost:3000/">
+                    <img src="./images/planet_banner.png" alt="planet banner"/>
+                    Nasa Exoplanet archive
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div id="navbarContent" class="collapse navbar-collapse">
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="http://localhost:3000/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="http://localhost:3000/about">About</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <section>
+            <article>
+                <h2>Explore the Archive:</h2>
+                </br></br>
+                <form>
+                    <input type="search" class="planet_name_search" name="search" id="search"
+                           placeholder="Enter a planet name"/>
+                </form>
+                </br>
+                <div style="text-align: center">
+                    <button class="advanced_search_button" id="menu"> Advanced search</button>
+                </div>
+                </br>
+                <div id="menu-box" style="display: none">
+                    <p style="text-align: center; font-size: 1.2em">Click on the parameter to get more informations.</p>
+                    <form>
+                        <div id="inputs"></div>
+                        <div class="flex_advanced_search">
+                            <div class="input_box" data-toggle="popover"
+                                 title="Planet name"
+                                 data-content="Enter your desired planet name.</br></br> Value can be a string or an integer."
+                                 data-placement="bottom" data-trigger="focus" data-html="true">
+                                <label for="pl_name">Planet name</label>
+                                <input type="search" class="form-control text-center" name="pl_name" id="pl_name"
+                                       placeholder="Ex: 11 Com b">
+                            </div>
+                            <div class="input_box" data-toggle="popover"
+                                 title="Hostname"
+                                 data-content="Enter your desired hostname.</br></br> Value can be a string or an integer."
+                                 data-placement="bottom" data-trigger="focus" data-html="true">
+                                <label for="hostname">Hostname</label>
+                                <input type="search" class="form-control text-center" name="hostname" id="hostname"
+                                       placeholder="Ex: 11 Com">
+                            </div>
+                            <div class="input_box"
+                                 data-toggle="popover"
+                                 title="Default Parameter Set" data-content="Value must be 0 or 1."
+                                 data-placement="top" data-trigger="focus" data-html="true">
+                                <label for="default_flag">Default Parameter Set</label>
+                                <div class="range_input">
+                                    <select name="default_flag" id="default_flag">
+                                        <option value="" selected disabled hidden>Ex : 0</option>
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="input_box"
+                                 data-toggle="popover"
+                                 title="Number of Stars"
+                                 data-content="Enter your desired number of Stars.</br></br> Values must be an integer.</br></br> Values are incluses.
+                                            </br></br> Only one filled field is required."
+                                 data-placement="bottom" data-trigger="focus" data-html="true">
+                                <label for="sy_snum">Number of Stars</label>
+                                <div class="range_input">
+                                    <input type="number" class="form-control text-center" name="sy_snum" id="sy_snum"
+                                           style="width: 45%" placeholder="Min" min="0">
+                                    <input type="number" class="form-control text-center" name="sy_snum" id="sy_snum2"
+                                           style="width: 45%" placeholder="Max" min="0">
+                                </div>
+                            </div>
+                            <div class="input_box"
+                                 data-toggle="popover"
+                                 title="Number of Planets"
+                                 data-content="Enter your desired number of Planets.</br></br> Values must be an integer.</br></br> Values are incluses.
+                                                </br></br> Only one filled field is required."
+                                 data-placement="bottom" data-trigger="focus" data-html="true">
+                                <label for="sy_pnum">Number of Planets</label>
+                                <div class="range_input">
+                                    <input type="search" class="form-control text-center" name="sy_pnum" id="sy_pnum"
+                                           style="width: 45%" placeholder="Min">
+                                    <input type="search" class="form-control text-center" name="sy_pnum" id="sy_pnum2"
+                                           style="width: 45%" placeholder="Max">
+                                </div>
+                            </div>
+                            <div class="input_box" data-toggle="popover"
+                                 title="Discovery method"
+                                 data-content="Select your desired discovery method.</br></br><a href='https://en.wikipedia.org/wiki/Methods_of_detecting_exoplanets' target='_blank'>More informations.</a>"
+                                 data-placement="top" data-trigger="focus" data-html="true">
+                                <label for="discoverymethod">Discovery method</label>
+                                <div class="range_input">
+                                    <select name="discoverymethod" id="discoverymethod">
+                                        <option value="" selected disabled hidden>Ex : Radial velocity</option>
+                                        <option value="astrometry">Astrometry</option>
+                                        <option value="disk kinematics">Disk Kinematics</option>
+                                        <option value="eclipse timing variations">Eclipse Timing Variations</option>
+                                        <option value="imaging">Imaging</option>
+                                        <option value="microlensing">Microlensing</option>
+                                        <option value="orbital brightness modulation">Orbital Brightness Modulation
+                                        </option>
+                                        <option value="pulsar timing">Pulsar Timing</option>
+                                        <option value="pulsation brightness modulation">Pulsation Brightness
+                                            Modulation
+                                        </option>
+                                        <option value="pulsation timing variations">Pulsation Timing Variations</option>
+                                        <option value="radial velocity">Radial Velocity</option>
+                                        <option value="transit">Transit</option>
+                                        <option value="transit timing variations">Transit Timing Variations</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="input_box"
+                                 data-toggle="popover"
+                                 title="Discovery Year"
+                                 data-content="Enter your desired discovery year.</br></br> Values must be an integer.</br></br> Values are incluses.
+                                                </br></br> Only one filled field is required."
+                                 data-placement="bottom" data-trigger="focus" data-html="true">
+                                <label for="disc_year">Discovery year</label>
+                                <div class="range_input">
+                                    <input type="search" class="form-control text-center" name="disc_year"
+                                           id="disc_year"
+                                           style="width: 45%" placeholder="Min">
+                                    <input type="search" class="form-control text-center" name="disc_year"
+                                           id="disc_year2"
+                                           style="width: 45%" placeholder="Max">
+                                </div>
+                            </div>
+
+                            <div class="input_box" data-toggle="popover"
+                                 title="Discovery Facility"
+                                 data-content="Enter your desired discovery facility.</br></br> Value can be a string or an integer."
+                                 data-placement="bottom" data-trigger="focus" data-html="true">
+                                <label for="disc_facility">Discovery facility</label>
+                                <input type="search" class="form-control text-center" name="disc_facility"
+                                       id="disc_facility" placeholder="Ex: Kepler">
+                            </div>
+
+                            <div class="input_box" data-toggle="popover"
+                                 title="Solution type"
+                                 data-content="Select your desired solution type."
+                                 data-placement="top" data-trigger="focus" data-html="true">
+                                <label for="soltype">Solution type</label>
+                                <div class="range_input">
+                                    <select name="soltype" id="soltype">
+                                        <option value="" selected disabled hidden>Ex : Published Confirmed</option>
+                                        <option value="Published Confirmed">Published Confirmed</option>
+                                        <option value="Kepler Project Candidate (q1_q17_dr25_sup_koi)">Kepler Project
+                                            Candidate (q1_q17_dr25_sup_koi)
+                                        </option>
+                                        <option value="Kepler Project Candidate (q1_q16_koi)">Kepler Project Candidate
+                                            (q1_q16_koi)
+                                        </option>
+                                        <option value="Kepler Project Candidate (q1_q17_dr25_koi)">Kepler Project
+                                            Candidate (q1_q17_dr25_koi)
+                                        </option>
+                                        <option value="Kepler Project Candidate (q1_q17_dr24_koi)">Kepler Project
+                                            Candidate (q1_q17_dr24_koi)
+                                        </option>
+                                        <option value="Kepler Project Candidate (q1_q12_koi)">Kepler Project Candidate
+                                            (q1_q12_koi)
+                                        </option>
+                                        <option value="Kepler Project Candidate (q1_q8_koi)">Kepler Project Candidate
+                                            (q1_q8_koi)
+                                        </option>
+                                        <option value="Published Candidate">Published Candidate</option>
+                                        <option value="TESS Project Candidate">TESS Project Candidate</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="input_box" data-toggle="popover"
+                                 title="Planet status"
+                                 data-content="Select your desired planet status."
+                                 data-placement="top" data-trigger="focus" data-html="true">
+                                <label for="pl_controv_flag">Planet status</label>
+                                <div class="range_input">
+                                    <select name="pl_controv_flag" id="pl_controv_flag">
+                                        <option value="" selected disabled hidden>Ex : Confirmed</option>
+                                        <option value="0">Confirmed</option>
+                                        <option value="1">Controversial</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="input_box" data-toggle="popover"
+                                 title="Planetary Parameter Reference"
+                                 data-content="Enter your desired planetary parameter reference.</br></br> Value can be a string or an integer."
+                                 data-placement="bottom" data-trigger="focus" data-html="true">
+                                <label for="pl_refname">Planetary Parameter Reference</label>
+                                <input type="search" class="form-control text-center" name="pl_refname" id="pl_refname"
+                                       placeholder="Ex: Q1-Q17 DR25 Supplemental KOI Table">
+                            </div>
+
+                            <div class="input_box"
+                                 data-toggle="popover"
+                                 title="Orbital Period [days]"
+                                 data-content="Enter your desired number of Orbital Period [days].</br></br> Values must be an integer or a float.</br></br> Values are incluses.
+                                                </br></br> Only one filled field is required."
+                                 data-placement="bottom" data-trigger="focus" data-html="true">
+                                <label for="pl_orbper">Orbital Period [days]</label>
+                                <div class="range_input">
+                                    <input type="number" class="form-control text-center" name="pl_orbper"
+                                           id="pl_orbper"
+                                           style="width: 45%" placeholder="Min">
+                                    <input type="number" class="form-control text-center" name="pl_orbper"
+                                           id="pl_orbper2"
+                                           style="width: 45%" placeholder="Max">
+                                </div>
+                            </div>
+
+                            <div class="input_box"
+                                 data-toggle="popover"
+                                 title="Orbit Semi-Major Axis [au]"
+                                 data-content="Enter your desired number of Orbit Semi-Major Axis [au].
+                                 </br></br> Values must be an integer or a float.</br></br> Values are incluses.
+                                 </br></br> Only one filled field is required.
+                                 </br></br><a href='https://en.wikipedia.org/wiki/Semi-major_and_semi-minor_axes' target='_blank'>More informations.</a>"
+                                 data-placement="bottom" data-trigger="focus" data-html="true">
+                                <label for="pl_orbsmax">Orbit Semi-Major Axis [au]</label>
+                                <div class="range_input">
+                                    <input type="number" class="form-control text-center" name="pl_orbsmax"
+                                           id="pl_orbsmax"
+                                           style="width: 45%" placeholder="Min">
+                                    <input type="number" class="form-control text-center" name="pl_orbsmax"
+                                           id="pl_orbsmax2"
+                                           style="width: 45%" placeholder="Max">
+                                </div>
+                            </div>
+
+                            <div class="input_box"
+                                 data-toggle="popover"
+                                 title="Planet Radius [Earth Radius]"
+                                 data-content="Enter your desired number of Planet Radius [Earth Radius].</br></br> Values must be an integer or a float.</br></br> Values are incluses.
+                                                </br></br> Only one filled field is required."
+                                 data-placement="bottom" data-trigger="focus" data-html="true">
+                                <label for="pl_rade">Planet Radius [Earth Radius]</label>
+                                <div class="range_input">
+                                    <input type="number" class="form-control text-center" name="pl_rade" id="pl_rade"
+                                           style="width: 45%" placeholder="Min">
+                                    <input type="number" class="form-control text-center" name="pl_rade" id="pl_rade2"
+                                           style="width: 45%" placeholder="Max">
+                                </div>
+                            </div>
+
+                            <div class="input_box"
+                                 data-toggle="popover"
+                                 title="Planet Radius [Jupiter Radius]"
+                                 data-content="Enter your desired number of Planet Radius [Jupiter Radius].</br></br> Values must be an integer or a float.</br></br> Values are incluses.
+                                                </br></br> Only one filled field is required."
+                                 data-placement="bottom" data-trigger="focus" data-html="true">
+                                <label for="pl_radj">Planet Radius [Jupiter Radius]</label>
+                                <div class="range_input">
+                                    <input type="number" class="form-control text-center" name="pl_radj" id="pl_radj"
+                                           style="width: 45%" placeholder="Min">
+                                    <input type="number" class="form-control text-center" name="pl_radj" id="pl_radj2"
+                                           style="width: 45%" placeholder="Max">
+                                </div>
+                            </div>
+
+                            <div class="input_box"
+                                 data-toggle="popover"
+                                 title="Planet Mass*sin(i) [Earth Mass]"
+                                 data-content="Enter your desired number of Planet Mass*sin(i) [Earth Mass].</br></br> Values must be an integer or a float.</br></br> Values are incluses.
+                                                </br></br> Only one filled field is required."
+                                 data-placement="bottom" data-trigger="focus" data-html="true">
+                                <label for="pl_msinie">Planet Mass*sin(i) [Earth Mass]</label>
+                                <div class="range_input">
+                                    <input type="number" class="form-control text-center" name="pl_msinie"
+                                           id="pl_msinie"
+                                           style="width: 45%" placeholder="Min">
+                                    <input type="number" class="form-control text-center" name="pl_msinie"
+                                           id="pl_msinie2"
+                                           style="width: 45%" placeholder="Max">
+                                </div>
+                            </div>
+
+                            <div class="input_box"
+                                 data-toggle="popover"
+                                 title="Planet Mass*sin(i) [Jupiter Mass]"
+                                 data-content="Enter your desired number of Planet Mass*sin(i) [Jupiter Mass].</br></br> Values must be an integer or a float.</br></br> Values are incluses.
+                                                </br></br> Only one filled field is required."
+                                 data-placement="bottom" data-trigger="focus" data-html="true">
+                                <label for="pl_msinij">Planet Mass*sin(i) [Jupiter Mass]</label>
+                                <div class="range_input">
+                                    <input type="number" class="form-control text-center" name="pl_msinij"
+                                           id="pl_msinij"
+                                           style="width: 45%" placeholder="Min">
+                                    <input type="number" class="form-control text-center" name="pl_msinij"
+                                           id="pl_msinij2"
+                                           style="width: 45%" placeholder="Max">
+                                </div>
+                            </div>
+
+                            <div class="input_box" data-toggle="popover"
+                                 title="Planet Mass or Mass*sin(i) Provenance"
+                                 data-content="Select your desired Planet Mass or Mass*sin(i) Provenance."
+                                 data-placement="top" data-trigger="focus" data-html="true">
+                                <label for="pl_bmassprov" style="font-size: 1em">Planet Mass or Mass*sin(i)
+                                    Provenance</label>
+                                <div class="range_input">
+                                    <select name="pl_bmassprov" id="pl_bmassprov">
+                                        <option value="" selected disabled hidden>Ex : Mass</option>
+                                        <option value="Mass">Mass</option>
+                                        <option value="Msini">Msini</option>
+                                        <option value="Msin(i)/sin(i)">Msin(i)/sin(i)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="input_box"
+                                 data-toggle="popover"
+                                 title="Eccentricity"
+                                 data-content="Enter your desired Eccentricity.</br></br> Values must be an integer or a float between 0 and 1.</br></br> Values are incluses.
+                                                </br></br> Only one filled field is required.
+                                                </br></br><a href='https://en.wikipedia.org/wiki/Orbital_eccentricity' target='_blank'>More informations.</a>"
+                                 data-placement="bottom" data-trigger="focus" data-html="true">
+                                <label for="pl_orbeccen">Eccentricity</label>
+                                <div class="range_input">
+                                    <input type="number" class="form-control text-center" name="pl_orbeccen"
+                                           id="pl_orbeccen"
+                                           style="width: 45%" placeholder="Min" min="0" max="1" step="0.001">
+                                    <input type="number" class="form-control text-center" name="pl_orbeccen"
+                                           id="pl_orbeccen2"
+                                           style="width: 45%" placeholder="Max" min="0" max="1" step="0.001">
+                                </div>
+                            </div>
+
+                            <div class="input_box"
+                                 data-toggle="popover"
+                                 title="Insolation Flux [Earth Flux]"
+                                 data-content="Enter your desired Insolation Flux [Earth Flux].</br></br> Values must be an integer or a float.</br></br> Values are incluses.
+                                                </br></br> Only one filled field is required."
+                                 data-placement="bottom" data-trigger="focus" data-html="true">
+                                <label for="pl_insol">Insolation Flux [Earth Flux]</label>
+                                <div class="range_input">
+                                    <input type="number" class="form-control text-center" name="pl_insol" id="pl_insol"
+                                           style="width: 45%" placeholder="Min">
+                                    <input type="number" class="form-control text-center" name="pl_insol" id="pl_insol2"
+                                           style="width: 45%" placeholder="Max">
+                                </div>
+                            </div>
+
+                            <div class="input_box"
+                                 data-toggle="popover"
+                                 title="Equilibrium Temperature [K]"
+                                 data-content="Enter your desired Equilibrium Temperature [K].</br></br> Values can be an integer or a float.</br></br> Values are incluses.
+                                                </br></br> Only one filled field is required."
+                                 data-placement="bottom" data-trigger="focus" data-html="true">
+                                <label for="pl_eqt">Equilibrium Temperature [K]</label>
+                                <div class="range_input">
+                                    <input type="number" class="form-control text-center" name="pl_eqt" id="pl_eqt"
+                                           style="width: 45%" placeholder="Min">
+                                    <input type="number" class="form-control text-center" name="pl_eqt" id="pl_eqt2"
+                                           style="width: 45%" placeholder="Max">
+                                </div>
+                            </div>
+
+                            <div class="input_box" data-toggle="popover"
+                                 title="Data show Transit Timing Variations"
+                                 data-content="Select your desired Data show Transit Timing Variations."
+                                 data-placement="top" data-trigger="focus" data-html="true">
+                                <label for="ttv_flag" style="font-size: 1em">Data show Transit Timing Variations</label>
+                                <div class="range_input">
+                                    <select name="ttv_flag" id="ttv_flag">
+                                        <option value="" selected disabled hidden>Ex : Yes</option>
+                                        <option value="0">No</option>
+                                        <option value="1">Yes</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="input_box" data-toggle="popover"
+                                 title="Stellar Parameter Reference"
+                                 data-content="Enter your desired Stellar Parameter Reference.</br></br> Value can be a string or an integer."
+                                 data-placement="bottom" data-trigger="focus" data-html="true">
+                                <label for="st_refname">Stellar Parameter Reference</label>
+                                <input type="search" class="form-control text-center" name="st_refname" id="st_refname"
+                                       placeholder="Ex: Rodriguez et al. 2018">
+                            </div>
+
+                            <div class="input_box" data-toggle="popover"
+                                 title="Spectral Type"
+                                 data-content="Enter your desired Spectral Type.</br></br> Value can be a string or an integer.</br></br><a href='https://en.wikipedia.org/wiki/Stellar_classification' target='_blank'>More informations.</a>"
+                                 data-placement="bottom" data-trigger="focus" data-html="true">
+                                <label for="st_spectype">Spectral Type</label>
+                                <input type="search" class="form-control text-center" name="st_spectype"
+                                       id="st_spectype" placeholder="Ex: G0 V">
+                            </div>
+
+                            <div class="input_box"
+                                 data-toggle="popover"
+                                 title="Stellar Effective Temperature [K]"
+                                 data-content="Enter your desired Stellar Effective Temperature [K].</br></br> Values can be an integer or a float.</br></br> Values are incluses.
+                                                </br></br> Only one filled field is required."
+                                 data-placement="bottom" data-trigger="focus" data-html="true">
+                                <label for="st_teff">Stellar Effective Temperature [K]</label>
+                                <div class="range_input">
+                                    <input type="number" class="form-control text-center" name="st_teff" id="st_teff"
+                                           style="width: 45%" placeholder="Min">
+                                    <input type="number" class="form-control text-center" name="st_teff" id="st_teff2"
+                                           style="width: 45%" placeholder="Max">
+                                </div>
+                            </div>
+
+                            <div class="input_box"
+                                 data-toggle="popover"
+                                 title="Stellar Radius [Solar Radius]"
+                                 data-content="Enter your desired Stellar Radius [Solar Radius].</br></br> Values can be an integer or a float.</br></br> Values are incluses.
+                                                </br></br> Only one filled field is required."
+                                 data-placement="bottom" data-trigger="focus" data-html="true">
+                                <label for="st_rad">Stellar Radius [Solar Radius]</label>
+                                <div class="range_input">
+                                    <input type="number" class="form-control text-center" name="st_rad" id="st_rad"
+                                           style="width: 45%" placeholder="Min">
+                                    <input type="number" class="form-control text-center" name="st_rad" id="st_rad2"
+                                           style="width: 45%" placeholder="Max">
+                                </div>
+                            </div>
+
+                            <div class="input_box"
+                                 data-toggle="popover"
+                                 title="Stellar Mass [Solar mass]"
+                                 data-content="Enter your desired Stellar Mass [Solar mass].</br></br> Values can be an integer or a float.</br></br> Values are incluses.
+                                                </br></br> Only one filled field is required."
+                                 data-placement="bottom" data-trigger="focus" data-html="true">
+                                <label for="st_mass">Stellar Mass [Solar mass]</label>
+                                <div class="range_input">
+                                    <input type="number" class="form-control text-center" name="st_mass" id="st_mass"
+                                           style="width: 45%" placeholder="Min">
+                                    <input type="number" class="form-control text-center" name="st_mass" id="st_mass2"
+                                           style="width: 45%" placeholder="Max">
+                                </div>
+                            </div>
+
+                            <div class="input_box"
+                                 data-toggle="popover"
+                                 title="Stellar Metallicity [dex]"
+                                 data-content="Enter your desired Stellar Metallicity [dex].</br></br> Values can be an integer or a float.
+                                 </br></br> Values can be negative.
+                                 </br></br> Values are incluses.
+                                 </br></br> Only one filled field is required.
+                                 </br></br><a href='https://en.wikipedia.org/wiki/Metallicity' target='_blank'>More informations.</a>"
+                                 data-placement="bottom" data-trigger="focus" data-html="true">
+                                <label for="st_met">Stellar Metallicity [dex]</label>
+                                <div class="range_input">
+                                    <input type="number" class="form-control text-center" name="st_met" id="st_met"
+                                           style="width: 45%" placeholder="Min">
+                                    <input type="number" class="form-control text-center" name="st_met" id="st_met2"
+                                           style="width: 45%" placeholder="Max">
+                                </div>
+                            </div>
+
+                            <div class="input_box" data-toggle="popover"
+                                 title="Data show Transit Timing Variations"
+                                 data-content="Select your desired Stellar Metallicity Ratio."
+                                 data-placement="top" data-trigger="focus" data-html="true">
+                                <label for="st_metratio">Stellar Metallicity Ratio</label>
+                                <div class="range_input">
+                                    <select name="st_metratio" id="st_metratio">
+                                        <option value="" selected disabled hidden>Ex : [Fe/H]</option>
+                                        <option value="[Fe/H]">[Fe/H]</option>
+                                        <option value="[M/H]">[M/H]</option>
+                                        <option value="[m/H]">[m/H]</option>
+                                        <option value="[Me/H]">[Me/H]</option>
+                                        <option value="[Fe/H[">[Fe/H[</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="input_box"
+                                 data-toggle="popover"
+                                 title="Stellar Surface Gravity [log10(cm/s**2)]"
+                                 data-content="Enter your desired Stellar Surface Gravity [log10(cm/s**2)].</br></br> Values can be an integer or a float.
+                                 </br></br> Values are incluses.
+                                 </br></br> Only one filled field is required."
+                                 data-placement="bottom" data-trigger="focus" data-html="true">
+                                <label for="st_logg" style="font-size: 1em">Stellar Surface Gravity
+                                    [log10(cm/s**2)]</label>
+                                <div class="range_input">
+                                    <input type="number" class="form-control text-center" name="st_logg" id="st_logg"
+                                           style="width: 45%" placeholder="Min">
+                                    <input type="number" class="form-control text-center" name="st_logg" id="st_logg2"
+                                           style="width: 45%" placeholder="Max">
+                                </div>
+                            </div>
+
+                            <div class="input_box" data-toggle="popover"
+                                 title="System Parameter Reference"
+                                 data-content="Enter your desired System Parameter Reference.</br></br> Value can be a string or an integer."
+                                 data-placement="bottom" data-trigger="focus" data-html="true">
+                                <label for="sy_refname">System Parameter Reference</label>
+                                <input type="search" class="form-control text-center" name="sy_refname" id="sy_refname"
+                                       placeholder="Ex: TICv8">
+                            </div>
+
+                            <div class="input_box" data-toggle="popover"
+                                 title="RA [sexagesimal]"
+                                 data-content="Enter your desired RA [sexagesimal].</br></br> Value format must be 'HHhMMmSS.SSs'."
+                                 data-placement="bottom" data-trigger="focus" data-html="true">
+                                <label for="rastr">RA [sexagesimal]</label>
+                                <input type="search" class="form-control text-center" name="rastr" id="rastr"
+                                       placeholder="19h48m27.62s">
+                            </div>
+
+                            <div class="input_box" data-toggle="popover"
+                                 title="Dec [sexagesimal]"
+                                 data-content="Enter your desired Dec [sexagesimal].</br></br> Value format must be '+DDdMMmSS.SSs' or '-DDdMMmSS.SSs'."
+                                 data-placement="bottom" data-trigger="focus" data-html="true">
+                                <label for="decstr">Dec [sexagesimal]</label>
+                                <input type="search" class="form-control text-center" name="decstr" id="decstr"
+                                       placeholder="+41d54m32.79s">
+                            </div>
+
+                            <div class="input_box"
+                                 data-toggle="popover"
+                                 title="Distance [pc]"
+                                 data-content="Enter your desired Distance [pc].</br></br> Values can be an integer or a float.
+                                 </br></br> Values are incluses.
+                                 </br></br> Only one filled field is required."
+                                 data-placement="bottom" data-trigger="focus" data-html="true">
+                                <label for="sy_dist">Distance [pc]</label>
+                                <div class="range_input">
+                                    <input type="number" class="form-control text-center" name="sy_dist" id="sy_dist"
+                                           style="width: 45%" placeholder="Min">
+                                    <input type="number" class="form-control text-center" name="sy_dist" id="sy_dist2"
+                                           style="width: 45%" placeholder="Max">
+                                </div>
+                            </div>
+
+                            <div class="input_box"
+                                 data-toggle="popover"
+                                 title="V (Johnson) Magnitude"
+                                 data-content="Enter your desired V (Johnson) Magnitude.</br></br> Values can be an integer or a float.
+                                 </br></br> Values are incluses.
+                                 </br></br> Only one filled field is required."
+                                 data-placement="bottom" data-trigger="focus" data-html="true">
+                                <label for="sy_vmag">V (Johnson) Magnitude</label>
+                                <div class="range_input">
+                                    <input type="number" class="form-control text-center" name="sy_vmag" id="sy_vmag"
+                                           style="width: 45%" placeholder="Min">
+                                    <input type="number" class="form-control text-center" name="sy_vmag" id="sy_vmag2"
+                                           style="width: 45%" placeholder="Max">
+                                </div>
+                            </div>
+
+                            <div class="input_box"
+                                 data-toggle="popover"
+                                 title="Ks (2MASS) Magnitude"
+                                 data-content="Enter your desired Ks (2MASS) Magnitude.</br></br> Values can be an integer or a float.
+                                 </br></br> Values are incluses.
+                                 </br></br> Only one filled field is required."
+                                 data-placement="bottom" data-trigger="focus" data-html="true">
+                                <label for="sy_kmag">Ks (2MASS) Magnitude</label>
+                                <div class="range_input">
+                                    <input type="number" class="form-control text-center" name="sy_kmag" id="sy_kmag"
+                                           style="width: 45%" placeholder="Min">
+                                    <input type="number" class="form-control text-center" name="sy_kmag" id="sy_kmag2"
+                                           style="width: 45%" placeholder="Max">
+                                </div>
+                            </div>
+
+                            <div class="input_box"
+                                 data-toggle="popover"
+                                 title="Gaia Magnitude"
+                                 data-content="Enter your desired Gaia Magnitude.</br></br> Values can be an integer or a float.
+                                 </br></br> Values are incluses.
+                                 </br></br> Only one filled field is required."
+                                 data-placement="bottom" data-trigger="focus" data-html="true">
+                                <label for="sy_gaiamag">Gaia Magnitude</label>
+                                <div class="range_input">
+                                    <input type="number" class="form-control text-center" name="sy_gaiamag"
+                                           id="sy_gaiamag"
+                                           style="width: 45%" placeholder="Min">
+                                    <input type="number" class="form-control text-center" name="sy_gaiamag"
+                                           id="sy_gaiamag2"
+                                           style="width: 45%" placeholder="Max">
+                                </div>
+                            </div>
+
+                            <div class="input_box" data-toggle="popover"
+                                 title="Date of Last Update"
+                                 data-content="Enter your desired Date of Last Update."
+                                 data-placement="bottom" data-trigger="focus" data-html="true">
+                                <label for="rowupdate">Date of Last Update</label>
+                                <input type="date" class="form-control text-center" name="rowupdate" id="rowupdate">
+                            </div>
+
+                            <div class="input_box" data-toggle="popover"
+                                 title="Planetary Parameter Reference Publication Date"
+                                 data-content="Enter your desired Planetary Parameter Reference Publication Date."
+                                 data-placement="bottom" data-trigger="focus" data-html="true">
+                                <label for="pl_pubdate" style="font-size: 1em">Planetary Parameter Reference Publication
+                                    Date</label>
+                                <input type="month" class="form-control text-center" name="pl_pubdate" id="pl_pubdate">
+                            </div>
+
+                            <div class="input_box" data-toggle="popover"
+                                 title="Release Date"
+                                 data-content="Enter your desired Release Date."
+                                 data-placement="bottom" data-trigger="focus" data-html="true">
+                                <label for="releasedate">Release Date</label>
+                                <input type="date" class="form-control text-center" name="releasedate" id="releasedate">
+                            </div>
+
+                        </div>
+                        <div style="text-align: center">
+                            <button id="advanced_search_button" type="button">Search</button>
+                        </div>
+                    </form>
+                </div>
+
+                </br></br>
+                <h2>Result:</h2>
+                </br></br>
+                <div class="exoplanet_show_result">
+                    <div id="result"></div>
+                </div>
+                </br></br>
+            </article>
+        </section>
+    </div>
+    <footer>
+        <div class="footer">
+            </br>
+            <div class="footer_links">
+                <a href="https://github.com/gdtdg" target="_blank"><img src="./images/github_logo.png"
+                                                                        alt="github logo" height="55px"
+                                                                        width="55px"/></a>
+                <a href="https://www.linkedin.com/in/gr%C3%A9goire-d-ab9b05233/" target="_blank"><img
+                        src="./images/linkedin_logo.png" alt="linkedin logo" style="padding-left: 10px"/></a>
+                <a href="https://www.nasa.gov/" target="_blank"><img src="./images/icon_nasa_grey.png"
+                                                                     alt="nasa logo grey"/></a>
+            </div>
+            </br>
+            <div class="footer_text">
+                <p>
+                    This website is a revamp of the <a href="https://exoplanetarchive.ipac.caltech.edu/index.html">NASA
+                    Exoplanet Archive</a> is operated by the California Institute of Technology,
+                    under contract with the National Aeronautics and Space Administration under the Exoplanet
+                    Exploration
+                    Program.
+                </p>
+            </div>
+        </div>
+    </footer>
+</div>
+</body>
+</html>
+
+<script
+        src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous">
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+<script type="module" src="./javascripts/script_index.js"></script>
