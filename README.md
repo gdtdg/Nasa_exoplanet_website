@@ -1,24 +1,20 @@
-# Association des chat de la street website
+# Nasa exoplanet website
 
-A fictional cat protection website.
+A website project designed to revamp [the Nasa Exoplanet Archive website](https://exoplanetarchive.ipac.caltech.edu/index.html).
 
 ## Installation
 
-### Requirements
+### ETL Requirements
 
 Python 3.9 required.
 
 Python packages required : ```pip install -r requirements.txt```
 
-## Instructions
+## ETL Instructions
 
-You need to change in `config_template.toml`: the`secret key`, the `connection string to database`
-and the `upload folder` to receive cats images.
+You need to change in `config_file.py`: the `auth`, choose your `csv_file`
+and your `csv_file_cleaned` destination.
 
-Then replace `config_template.toml` name by `config.toml`.
+#### How to run the ETL:
 
-#### How to run the flask server:
-
-Setup the flask environment: `export FLASK_APP='app/routes'`
-
-then start the flask server: `flask run`
+Run the script of `etl_main.py`.
