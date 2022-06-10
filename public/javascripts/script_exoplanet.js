@@ -38,16 +38,16 @@ function ifValueDifferentThanUnknown(value, unit) {
     return value
 }
 
-function showPlControvFlag(exoplanet){
+function showPlControvFlag(exoplanet) {
     if (exoplanet.pl_controv_flag == 0) {
-         return '<span style="color: lime">Confirmed ✔</span>'
+        return '<span style="color: lime">Confirmed ✔</span>'
     }
     if (exoplanet.pl_controv_flag == 1) {
-        return  '<span style="color: orange">Controversial !</span>'
+        return '<span style="color: orange">Controversial !</span>'
     }
 }
 
-function  showSpectralType(exoplanet){
+function showSpectralType(exoplanet) {
     if (exoplanet.st_spectype == '') {
         return "Unknown"
     } else {
@@ -55,11 +55,11 @@ function  showSpectralType(exoplanet){
     }
 }
 
-function convertParsecsToLightYears(distance){
+function convertParsecsToLightYears(distance) {
     return (distance * 3.2615637769).toFixed(2)
 }
 
-function showDistanceLightYear(exoplanet){
+function showDistanceLightYear(exoplanet) {
     if (exoplanet.sy_dist == 0) {
         return 'Unknown <span style="color: lightgrey">distance from Earth</span>'
     } else {
@@ -75,7 +75,7 @@ function createExoplanetDisplay(exoplanet) {
     exoplanetMassValue = ifValueDifferentThanUnknown(exoplanetMassValue, " Earths")
 
     let exoplanetEccentricity = valueToDisplay(exoplanet.pl_orbeccen)
-    exoplanetEccentricity = ifValueDifferentThanUnknown(exoplanetEccentricity,'')
+    exoplanetEccentricity = ifValueDifferentThanUnknown(exoplanetEccentricity, '')
 
     let exoplanetSpectralType = showSpectralType(exoplanet);
 
