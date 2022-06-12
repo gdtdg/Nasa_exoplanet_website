@@ -23,6 +23,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'javascripts')))
 
+// Routers definitions
 app.use('/', indexRouter);
 app.use('/about', aboutRouter);
 app.use('/exoplanet/:planet_name', exoplanetRouter);

@@ -2,37 +2,18 @@ const express = require('express');
 const router = express.Router();
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 const https = require('https');
+const dataStoreService = require('../service/datastoreService');
 
 
 router.get('/random-search', async (req, res, next) => {
     // First, build elasticsearch query
     const randomQuery = JSON.stringify(randomSearchQuery());
     console.log("random query:", randomQuery);
+
     // Then, send the query to elasticsearch
-    const host = "localhost";
-    const port = "9200";
-    const index = "exoplanet_csv";
-    const url = `https://${host}:${port}/${index}/_search`;
-    const headers = {
-        'Content-Type': 'application/json',
-        'Authorization': 'Basic ZWxhc3RpYzo1anpSUUpwN05lbEV2d2VjdGtIbQ=='
-    };
-    const httpsAgent = new https.Agent({rejectUnauthorized: false});
-    const options = {
-        method: 'POST',
-        body: randomQuery,
-        headers: headers,
-        agent: httpsAgent
-    };
+    const exoplanets = await dataStoreService.queryData(randomQuery)
+    console.log("answer from es service", exoplanets);
 
-    const answerFromElasticsearch = await fetch(url, options)
-        .then((res) => res.json())
-        .catch((err) => console.log("Unable to fetch", err));
-
-    console.log("answer", answerFromElasticsearch);
-
-    const exoplanets = answerFromElasticsearch['hits']['hits'].map((obj) => obj._source);
-    console.log("exoplanets:", exoplanets);
     res.json({data: exoplanets});
 });
 
@@ -147,7 +128,6 @@ function buildAdvancedQuery(criteria) {
                         }
                     }
                 }
-
             }
         )
     ;
