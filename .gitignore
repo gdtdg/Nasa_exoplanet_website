@@ -1,2 +1,4 @@
 .idea/
 /venv/
+etl/logs.txt
+etl/error_logs.txt
