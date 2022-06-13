@@ -20,72 +20,30 @@ router.get('/random-search', async (req, res, next) => {
 /* GET an exoplanet data. */
 router.get('/:planetName', async (req, res, next) => {
     // First, build elasticsearch query
-    const query = JSON.stringify(buildQueryWithPlanetName(req.params.planetName));
+    const planetNameQuery = JSON.stringify(buildQueryWithPlanetName(req.params.planetName));
+    console.log("Planet Name query:", planetNameQuery);
 
     // Then, send the query to elasticsearch
-    const host = "localhost";
-    const port = "9200";
-    const index = "exoplanet_csv";
-    const url = `https://${host}:${port}/${index}/_search`;
-    const headers = {
-        'Content-Type': 'application/json',
-        'Authorization': 'Basic ZWxhc3RpYzo1anpSUUpwN05lbEV2d2VjdGtIbQ=='
-    };
-    const httpsAgent = new https.Agent({rejectUnauthorized: false});
-    const options = {
-        method: 'POST',
-        body: query,
-        headers: headers,
-        agent: httpsAgent
-    };
-
-    const answerFromElasticsearch = await fetch(url, options)
-        .then((res) => res.json())
-        .catch((err) => console.log("Unable to fetch", err));
-    const exoplanets = answerFromElasticsearch['hits']['hits'].map((obj) => obj._source);
+    const exoplanets = await dataStoreService.queryData(planetNameQuery)
+    console.log("answer from es service", exoplanets);
 
     res.json({data: exoplanets});
 });
 
 /* POST advanced search. */
-// https://localhost:3000/data/exoplanet/advanced-search
 router.post('/advanced-search', async (req, res, next) => {
     // on recupere le body => criteria
     const criteria = req.body;
-    console.log("criteria", JSON.stringify(criteria));
+    console.log("criteria:", JSON.stringify(criteria));
 
-    // Ensuite, avec ces criteres, on costruit la requete
+    // Ensuite, avec ces criteres, on construit la requete
     const advancedQuery = JSON.stringify(buildAdvancedQuery(criteria));
+    console.log("Advanced query:", advancedQuery);
 
     // executer la requete
-    const host = "localhost";
-    const port = "9200";
-    const index = "exoplanet_csv";
-    const url = `https://${host}:${port}/${index}/_search`;
-    const headers = {
-        'Content-Type': 'application/json',
-        'Authorization': 'Basic ZWxhc3RpYzo1anpSUUpwN05lbEV2d2VjdGtIbQ=='
-    };
-    const httpsAgent = new https.Agent({rejectUnauthorized: false});
-    const options = {
-        method: 'POST',
-        body: advancedQuery,
-        headers: headers,
-        agent: httpsAgent
-    };
+    const exoplanets = await dataStoreService.queryData(advancedQuery);
+    console.log("answer from es service", exoplanets);
 
-    console.log("body", advancedQuery);
-    console.log("body", JSON.stringify(advancedQuery));
-
-    const answerFromElasticsearch = await fetch(url, options)
-        .then((res) => res.json())
-        .catch((err) => console.log("Unable to fetch", err));
-
-    // traiter les résultats.
-    console.log("answer", answerFromElasticsearch);
-    const exoplanets = answerFromElasticsearch['hits']['hits'].map((obj) => obj._source);
-
-    // Retourner les resultats
     res.json({data: exoplanets});
 });
 
