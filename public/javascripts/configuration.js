@@ -2,7 +2,7 @@ const SERVER_HOST = "localhost";
 const SERVER_PORT = "3000";
 const PROTOCOL = "http";
 
-let mapping = {
+const mapping = {
     "pl_name": "Planet Name",
     "hostname": "Host Name",
     "default_flag": "Default Parameter Set",
@@ -46,7 +46,7 @@ let mapping = {
 };
 
 
-let mappingInputs = {
+const mappingInputs = {
     "pl_name": "Planet Name",
     "hostname": "Host Name",
     "sy_snum": "Number of Stars",
@@ -83,7 +83,7 @@ let mappingInputs = {
 };
 
 
-let mappingSelect = {
+const mappingSelect = {
     "default_flag": "Default Parameter Set",
     "discoverymethod": "Discovery Method",
     "soltype": "Solution Type",
