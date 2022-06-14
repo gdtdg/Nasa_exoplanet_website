@@ -2,7 +2,7 @@ import {PROTOCOL, SERVER_HOST, SERVER_PORT} from "./configuration.js";
 
 
 async function getExoplanetDocs(planetName) {
-    const url = `${PROTOCOL}://${SERVER_HOST}:${SERVER_PORT}/data/exoplanet/${planetName}`;
+    const url = `${PROTOCOL}://${SERVER_HOST}:${SERVER_PORT}/data/exoplanet/${planetName}`; // TODO : Export the logic in a service (Same as datastore and datastoreService)
     const headers = {'Content-Type': 'application/json'};
     const options = {
         method: 'GET',
@@ -18,7 +18,7 @@ async function getExoplanetDocs(planetName) {
 
 
 async function getExoplanetDocsAdvancedSearch(criteria) {
-    const url = `${PROTOCOL}://${SERVER_HOST}:${SERVER_PORT}/data/exoplanet/advanced-search/`;
+    const url = `${PROTOCOL}://${SERVER_HOST}:${SERVER_PORT}/data/exoplanet/advanced-search/`; // TODO : Export the logic in a service (Same as datastore and datastoreService)
     const headers = {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
@@ -37,7 +37,7 @@ async function getExoplanetDocsAdvancedSearch(criteria) {
 }
 
 async function getRandomExoplanetDocs() {
-    const url = `${PROTOCOL}://${SERVER_HOST}:${SERVER_PORT}/data/exoplanet/random-search/`;
+    const url = `${PROTOCOL}://${SERVER_HOST}:${SERVER_PORT}/data/exoplanet/random-search/`; // TODO : Export the logic in a service (Same as datastore and datastoreService)
     const headers = {
         'Content-Type': 'application/json'
     };
