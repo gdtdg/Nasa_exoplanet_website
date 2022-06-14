@@ -2,7 +2,7 @@ import {getExoplanetDocs, mergeExoplanetDocs} from "./library.js";
 import {mapping} from "./configuration.js";
 
 
-let planetNameToFormat = window.location.pathname.slice(11);
+let planetNameToFormat = window.location.pathname.slice(11); // fixme, what if the pathname changes a bit ? Do a split on "/" and take the last piece.
 let planetName = decodeURI(planetNameToFormat);
 
 
