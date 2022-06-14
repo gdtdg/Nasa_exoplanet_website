@@ -78,7 +78,7 @@ function createExoplanetCard(exoplanetName) {
                         <div class="mask_index"></div>
                     </div>
                 <div class="exoplanet_name">${exoplanetName}</div>
-            </div>
+                </div>
             </a>`
 }
 
