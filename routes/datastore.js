@@ -1,7 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
-const https = require('https');
 const dataStoreService = require('../service/datastoreService');
 
 
