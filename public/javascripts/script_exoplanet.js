@@ -22,10 +22,10 @@ function valueToDisplay(value) {
             res = "Unknown"
         }
     }
-    if (value.length == 1) {
+    if (value.length === 1) {
         res = parseFloat(value).toFixed(2);
     }
-    if (value == '') {
+    if (value === '') {
         res = "Unknown"
     }
     return res;
