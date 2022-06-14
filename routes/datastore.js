@@ -6,11 +6,9 @@ const dataStoreService = require('../service/datastoreService');
 router.get('/random-search', async (req, res, next) => {
     // First, build elasticsearch query
     const randomQuery = JSON.stringify(randomSearchQuery());
-    console.log("random query:", randomQuery);
 
     // Then, send the query to elasticsearch
     const exoplanets = await dataStoreService.queryData(randomQuery)
-    console.log("answer from es service", exoplanets);
 
     res.json({data: exoplanets});
 });
@@ -19,11 +17,9 @@ router.get('/random-search', async (req, res, next) => {
 router.get('/:planetName', async (req, res, next) => {
     // First, build elasticsearch query
     const planetNameQuery = JSON.stringify(buildQueryWithPlanetName(req.params.planetName));
-    console.log("Planet Name query:", planetNameQuery);
 
     // Then, send the query to elasticsearch
     const exoplanets = await dataStoreService.queryData(planetNameQuery)
-    console.log("answer from es service", exoplanets);
 
     res.json({data: exoplanets});
 });
@@ -32,15 +28,12 @@ router.get('/:planetName', async (req, res, next) => {
 router.post('/advanced-search', async (req, res, next) => {
     // on recupere le body => criteria
     const criteria = req.body;
-    console.log("criteria:", JSON.stringify(criteria));
 
     // Ensuite, avec ces criteres, on construit la requete
     const advancedQuery = JSON.stringify(buildAdvancedQuery(criteria));
-    console.log("Advanced query:", advancedQuery);
 
     // executer la requete
     const exoplanets = await dataStoreService.queryData(advancedQuery);
-    console.log("answer from es service", exoplanets);
 
     res.json({data: exoplanets});
 });
