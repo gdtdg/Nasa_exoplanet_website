@@ -1,4 +1,5 @@
-import {getExoplanetDocs, mergeExoplanetDocs} from "./library.js";
+import {mergeExoplanetDocs} from "./library.js";
+import {getExoplanetDocs} from "./exoplanetDocsService.js"
 import {mapping} from "./configuration.js";
 
 

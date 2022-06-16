@@ -1,7 +1,3 @@
-const SERVER_HOST = "localhost";
-const SERVER_PORT = "3000";
-const PROTOCOL = "http";
-
 const mapping = {
     "pl_name": "Planet Name",
     "hostname": "Host Name",
@@ -93,4 +89,4 @@ const mappingSelect = {
     "st_metratio": "Stellar Metallicity Ratio",
 };
 
-export {SERVER_HOST, SERVER_PORT, PROTOCOL, mapping, mappingInputs, mappingSelect}
+export {mapping, mappingInputs, mappingSelect}

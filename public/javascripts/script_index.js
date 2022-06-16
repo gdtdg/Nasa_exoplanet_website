@@ -1,5 +1,8 @@
-import {getExoplanetDocs, mergeExoplanetDocs, getRandomExoplanetDocs, getExoplanetDocsAdvancedSearch, showResult, createExoplanetCard} from "./library.js";
-import {mappingInputs, mappingSelect, PROTOCOL, SERVER_HOST, SERVER_PORT} from "./configuration.js";
+import {createExoplanetCard, mergeExoplanetDocs, showResult} from "./library.js";
+
+import {mappingInputs, mappingSelect} from "./configuration.js";
+
+import {getExoplanetDocs, getExoplanetDocsAdvancedSearch, getRandomExoplanetDocs,} from "./exoplanetDocsService.js";
 
 
 async function randomSearch() {
@@ -22,7 +25,7 @@ async function search() {
             allCards += newCard;
         }
     }
-     document.getElementById('result').innerHTML = allCards;
+    document.getElementById('result').innerHTML = allCards;
 }
 
 function toggleAdvancedSearch() {
