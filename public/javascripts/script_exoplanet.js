@@ -3,9 +3,8 @@ import {getExoplanetDocs} from "./exoplanetDocsService.js"
 import {mapping} from "./configuration.js";
 
 
-let planetNameToFormat = window.location.pathname.slice(11); // fixme, what if the pathname changes a bit ? Do a split on "/" and take the last piece.
-let planetName = decodeURI(planetNameToFormat);
-
+let planetNameToFormat = window.location.pathname.split('/');
+let planetName = decodeURI(planetNameToFormat.at(-1));
 
 function createRow(mapping, exoplanetData) {
     return `<tr><th>${mapping}</th><td>${exoplanetData}</td></tr>`
