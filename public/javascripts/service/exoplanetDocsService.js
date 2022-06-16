@@ -1,6 +1,3 @@
-//TODO: exoplanetDocsService.js not in service folder
-//TODO: require does not work in script_index.js
-
 // Constants for this service
 const HOST = "localhost";
 const PORT = "3000";
@@ -46,10 +43,6 @@ async function getRandomExoplanetDocs() {
     };
     return await fetchExoplanetDocs(url, options);
 }
-
-// module.exports.getExoplanetDocs = getExoplanetDocs;
-// module.exports.getExoplanetDocsAdvancedSearch = getExoplanetDocsAdvancedSearch;
-// module.exports.getRandomExoplanetDocs = getRandomExoplanetDocs;
 
 export {
     getExoplanetDocs,
