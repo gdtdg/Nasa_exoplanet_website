@@ -2,7 +2,7 @@ import {createExoplanetCard, mergeExoplanetDocs, showResult} from "./library.js"
 
 import {mappingInputs, mappingSelect} from "./configuration.js";
 
-import {getExoplanetDocs, getExoplanetDocsAdvancedSearch, getRandomExoplanetDocs,} from "./exoplanetDocsService.js";
+import {getExoplanetDocs, getExoplanetDocsAdvancedSearch, getRandomExoplanetDocs,} from "./service/exoplanetDocsService.js";
 
 
 async function randomSearch() {
