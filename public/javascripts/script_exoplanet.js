@@ -10,7 +10,7 @@ function createRow(mapping, exoplanetData) {
     return `<tr><th>${mapping}</th><td>${exoplanetData}</td></tr>`
 }
 
-function valueToDisplay(value) {
+function computeValueToDisplay(value) {
     let res;
     if (value.length > 1) {
         // Value can be '' or 0.0
@@ -31,27 +31,29 @@ function valueToDisplay(value) {
     return res;
 }
 
-function ifValueDifferentThanUnknown(value, unit) {
+function formatValue(value, unit) {
     if (value !== "Unknown") {
         value = value + unit + "<span style='color:red; font-size: 1.5em'> *</span>";
     }
     return value
 }
 
-function showPlControvFlag(exoplanet) {
-    if (exoplanet.pl_controv_flag == 0) {
+function formatPlanetStatus(planetStatusArray) {
+    const planetStatusString = planetStatusArray.toString();
+    if (planetStatusString === "0") {
         return '<span style="color: lime">Confirmed ✔</span>'
     }
-    if (exoplanet.pl_controv_flag == 1) {
+    if (planetStatusString === "1") {
         return '<span style="color: orange">Controversial !</span>'
     }
 }
 
-function showSpectralType(exoplanet) {
-    if (exoplanet.st_spectype == '') {
+function formatSpectralType(spectralTypeArray) {
+    const spectralTypeString = spectralTypeArray.toString();
+    if (spectralTypeString.length === 0) {
         return "Unknown"
     } else {
-        return exoplanet.st_spectype;
+        return spectralTypeArray;
     }
 }
 
@@ -59,33 +61,34 @@ function convertParsecsToLightYears(distance) {
     return (distance * 3.2615637769).toFixed(2)
 }
 
-function showDistanceLightYear(exoplanet) {
-    if (exoplanet.sy_dist == 0) {
+function formatDistanceLightYear(distanceArray) {
+    const distanceString = distanceArray.toString();
+    if (distanceString.length === 0) {
         return 'Unknown <span style="color: lightgrey">distance from Earth</span>'
     } else {
-        let distanceLightYear = convertParsecsToLightYears(exoplanet.sy_dist)
+        const distanceLightYear = convertParsecsToLightYears(distanceArray)
         return '<span style="color: lightgrey">You are </span>' + distanceLightYear + '<span style="color: lightgrey"> light-years from Earth</span>';
     }
 }
 
 function createExoplanetDisplay(exoplanet) {
-    let planetStatusDisplay = showPlControvFlag(exoplanet);
+    let planetStatusDisplay = formatPlanetStatus(exoplanet.pl_controv_flag);
 
-    let exoplanetMassValue = valueToDisplay(exoplanet.pl_msinie)
-    exoplanetMassValue = ifValueDifferentThanUnknown(exoplanetMassValue, " Earths")
+    let exoplanetMassValue = computeValueToDisplay(exoplanet.pl_msinie)
+    exoplanetMassValue = formatValue(exoplanetMassValue, " Earths")
 
-    let exoplanetEccentricity = valueToDisplay(exoplanet.pl_orbeccen)
-    exoplanetEccentricity = ifValueDifferentThanUnknown(exoplanetEccentricity, '')
+    let exoplanetEccentricity = computeValueToDisplay(exoplanet.pl_orbeccen)
+    exoplanetEccentricity = formatValue(exoplanetEccentricity, '')
 
-    let exoplanetSpectralType = showSpectralType(exoplanet);
+    let exoplanetSpectralType = formatSpectralType(exoplanet.st_spectype);
 
-    let distanceLightYear = showDistanceLightYear(exoplanet);
+    let distanceLightYear = formatDistanceLightYear(exoplanet.sy_dist);
 
-    let exoplanetRadius = valueToDisplay(exoplanet.pl_rade)
-    exoplanetRadius = ifValueDifferentThanUnknown(exoplanetRadius, " Earths")
+    let exoplanetRadius = computeValueToDisplay(exoplanet.pl_rade)
+    exoplanetRadius = formatValue(exoplanetRadius, " Earths")
 
-    let exoplanetOrbitalPeriod = valueToDisplay(exoplanet.pl_orbper)
-    exoplanetOrbitalPeriod = ifValueDifferentThanUnknown(exoplanetOrbitalPeriod, " days")
+    let exoplanetOrbitalPeriod = computeValueToDisplay(exoplanet.pl_orbper)
+    exoplanetOrbitalPeriod = formatValue(exoplanetOrbitalPeriod, " days")
 
     return `<div class="exoplanet_display">
                     <div class="planet_display">
@@ -120,7 +123,6 @@ function createExoplanetDisplay(exoplanet) {
 
 
 function showExoplanetData(mapping, exoplanetData) {
-    console.log(exoplanetData);
     let table = "<table>";
     for (let key in mapping) {
         if (exoplanetData[key].length > 1) {

@@ -46,12 +46,18 @@ async function advancedSearch() {
             .map(function () {
                 return $(this).val();
             }).get();
-
-        if (valuesInput[0] != '' && valuesInput[1] != '') {
+        // Single input field is filled or range inputs both fields are filled:
+        if (valuesInput[0] !== '' && valuesInput[1] !== '') {
             queryObject[key] = valuesInput;
         }
-        if (valuesInput[0] != '' && valuesInput[1] == '') {
+        // Only the left field in filled:
+        if (valuesInput[0] !== '' && valuesInput[1] === '') {
             valuesInput[1] = valuesInput[0];
+            queryObject[key] = valuesInput;
+        }
+        // Only the right field in filled: we also check length to only select 2 fields inputs:
+        if (valuesInput[0] === '' && valuesInput[1] !== '' && valuesInput.length > 1) {
+            valuesInput[0] = valuesInput[1];
             queryObject[key] = valuesInput;
         }
     }
@@ -61,7 +67,7 @@ async function advancedSearch() {
             .map(function () {
                 return $(this).val();
             }).get();
-        if (valuesSelect != '') {
+        if (valuesSelect.length !== 0) {
             queryObject[key] = valuesSelect;
         }
     }
