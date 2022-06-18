@@ -1,10 +1,10 @@
 import {toggleAdvancedSearchMenu} from "./library.js";
-import {advancedSearch, randomSearch, search} from "./search_functions.js"
+import {advancedSearch, randomSearch, inputSearch} from "./search_functions.js"
 
 
 document.addEventListener("DOMContentLoaded", randomSearch);
 
-document.getElementById("search").addEventListener("input", search);
+document.getElementById("search").addEventListener("input", inputSearch);
 
 document.getElementById("menu").addEventListener('click', toggleAdvancedSearchMenu);
 

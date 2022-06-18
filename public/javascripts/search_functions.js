@@ -9,7 +9,7 @@ async function randomSearch() {
     showSearchResult(exoplanet);
 }
 
-async function search() {
+async function inputSearch() {
     let allCards = [];
     if (this.value.length === 0) {
         document.getElementById('result').innerHTML = "";
@@ -66,4 +66,4 @@ async function advancedSearch() {
     showSearchResult(exoplanet);
 }
 
-export {randomSearch, search, advancedSearch}
+export {randomSearch, inputSearch, advancedSearch}

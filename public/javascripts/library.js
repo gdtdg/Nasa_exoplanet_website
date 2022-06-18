@@ -3,7 +3,7 @@ import {computeValueForExoplanetDisplay, convertParsecsToLightYears} from "./hel
 // Used in script_index.js:
 
 function toggleAdvancedSearchMenu() {
-    let advancedSearch = document.getElementById('menu-box');
+    const advancedSearch = document.getElementById('menu-box');
     if (advancedSearch.style.display === "block") { // if is advancedSearch displayed, hide it
         advancedSearch.style.display = "none";
     } else { // if is advancedSearch hidden, display it

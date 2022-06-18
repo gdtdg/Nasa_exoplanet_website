@@ -28,7 +28,8 @@ function computeValueForExoplanetDisplay(value) {
     if (value.length === 1) {
         res = parseFloat(value).toFixed(2);
     }
-    if (value === '') {
+    let valueString = value.toString()
+    if (valueString.length === 0) {
         res = "Unknown"
     }
     return res;
