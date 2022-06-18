@@ -72,7 +72,7 @@ function formatDistanceLightYear(distanceArray) {
 
 
 function createExoplanetDisplay(exoplanet) {
-    let planetStatusDisplay = formatPlanetStatus(exoplanet.pl_controv_flag);
+    const planetStatusDisplay = formatPlanetStatus(exoplanet.pl_controv_flag);
 
     let exoplanetMassValue = computeValueForExoplanetDisplay(exoplanet.pl_msinie)
     exoplanetMassValue = formatValueForExoplanetDisplay(exoplanetMassValue, " Earths")
@@ -80,9 +80,9 @@ function createExoplanetDisplay(exoplanet) {
     let exoplanetEccentricity = computeValueForExoplanetDisplay(exoplanet.pl_orbeccen)
     exoplanetEccentricity = formatValueForExoplanetDisplay(exoplanetEccentricity, '')
 
-    let exoplanetSpectralType = formatSpectralType(exoplanet.st_spectype);
+    const exoplanetSpectralType = formatSpectralType(exoplanet.st_spectype);
 
-    let distanceLightYear = formatDistanceLightYear(exoplanet.sy_dist);
+    const distanceLightYear = formatDistanceLightYear(exoplanet.sy_dist);
 
     let exoplanetRadius = computeValueForExoplanetDisplay(exoplanet.pl_rade)
     exoplanetRadius = formatValueForExoplanetDisplay(exoplanetRadius, " Earths")

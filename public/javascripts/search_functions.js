@@ -31,7 +31,7 @@ async function advancedSearch() {
     let queryObject = {};
 
     for (let key in mappingInputs) {
-        let valuesInput = $(`input[name='${key}']`)
+        const valuesInput = $(`input[name='${key}']`)
             .map(function () {
                 return $(this).val();
             }).get();
@@ -52,7 +52,7 @@ async function advancedSearch() {
     }
 
     for (let key in mappingSelect) {
-        let valuesSelect = $(`select[name='${key}']`)
+        const valuesSelect = $(`select[name='${key}']`)
             .map(function () {
                 return $(this).val();
             }).get();
