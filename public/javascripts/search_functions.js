@@ -3,17 +3,17 @@ import {mergeExoplanetDocs} from "./helper.js";
 import {createExoplanetCard, showSearchResult} from "./library.js";
 import {mappingInputs, mappingSelect} from "./configuration.js";
 
-async function randomSearch() {
+async function handleRandomSearch() {
     const exoplanets = await getRandomExoplanetDocs();
     const exoplanet = mergeExoplanetDocs(exoplanets);
     showSearchResult(exoplanet);
 }
 
-async function inputSearch() {
+async function handleInputSearch() {
     let allCards = [];
     if (this.value.length === 0) {
         document.getElementById('result').innerHTML = "";
-        randomSearch();
+        handleRandomSearch();
     } else {
         const exoplanets = await getExoplanetDocs(this.value);
         const exoplanet = mergeExoplanetDocs(exoplanets);
@@ -26,7 +26,7 @@ async function inputSearch() {
     document.getElementById('result').innerHTML = allCards;
 }
 
-async function advancedSearch() {
+async function handleAdvancedSearch() {
     document.getElementById('result').innerHTML = "";
     let queryObject = {};
 
@@ -66,4 +66,4 @@ async function advancedSearch() {
     showSearchResult(exoplanet);
 }
 
-export {randomSearch, inputSearch, advancedSearch}
+export {handleRandomSearch, handleInputSearch, handleAdvancedSearch}

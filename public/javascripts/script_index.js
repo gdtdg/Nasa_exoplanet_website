@@ -1,14 +1,14 @@
 import {toggleAdvancedSearchMenu} from "./library.js";
-import {advancedSearch, randomSearch, inputSearch} from "./search_functions.js"
+import {handleAdvancedSearch, handleRandomSearch, handleInputSearch} from "./search_functions.js"
 
 
-document.addEventListener("DOMContentLoaded", randomSearch);
+document.addEventListener("DOMContentLoaded", handleRandomSearch);
 
-document.getElementById("search").addEventListener("input", inputSearch);
+document.getElementById("search").addEventListener("input", handleInputSearch);
 
 document.getElementById("menu").addEventListener('click', toggleAdvancedSearchMenu);
 
-document.getElementById("advanced_search_button").addEventListener('click', advancedSearch);
+document.getElementById("advanced_search_button").addEventListener('click', handleAdvancedSearch);
 
 $(function () {
     $('[data-toggle="popover"]').popover()
